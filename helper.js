@@ -11,9 +11,9 @@ export async function Login({ username, password }) {
   
     if (userLOGIN) {
         //
-        console.log(userLOGIN.type);
-        const token = jwt.sign({ id: userLOGIN.type }, process.env.Token_admin);
-        console.log(token);
+        // console.log(userLOGIN.type);
+        // const token = jwt.sign({ id: userLOGIN.type }, process.env.Token_admin);
+        // console.log(token);
         //
       const pass = await bcrypt.compare(password, userLOGIN.password);
       if (pass) return "true";
@@ -22,4 +22,13 @@ export async function Login({ username, password }) {
       console.log("INVALID CREDENTIALS");
       return null;
     }
+  }
+
+  export async function Getusers() {
+    const UserList = await client
+      .db("CMR")
+      .collection("users")
+      .find({})
+      .toArray();
+    return UserList;
   }
