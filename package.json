@@ -19,5 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
 }
