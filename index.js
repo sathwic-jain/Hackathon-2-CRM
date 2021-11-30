@@ -1,6 +1,7 @@
 import express from "express";
 import { MongoClient } from "mongodb";
 import { userRouter } from "./routes/users.js";
+import {leadRouter} from  "./routes/leads.js";
 import dotenv from "dotenv";
 import cors from "cors";
 // import jwt from "jsonwebtoken";
@@ -27,7 +28,7 @@ export async function createConnection() {
 }
 createConnection();
 app.use("/users", userRouter);
-app.use("/leads",userRouter);
+app.use("/leads",leadRouter);
 const client = await createConnection();
 // const token = jwt.sign({ id: userLOGIN.type }, process.env.SECRET_KEY);
 //       console.log(token);

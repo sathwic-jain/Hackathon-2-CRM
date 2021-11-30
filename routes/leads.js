@@ -9,4 +9,4 @@ router.route("/login").post(async (request, response) => {
   if (userCredentials) response.send("Signed in");
   else response.status(401).send("invalid credentials");
 });
-export const userRouter = router;
+export const leadRouter = router;
