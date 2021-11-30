@@ -14,6 +14,9 @@ app.use(cors());
 app.listen(PORT,()=>{
     console.log(`listening to ${PORT}`);
 });
+app.get("/", (request, response) => {
+    response.send("hello 👍😒🙌🙌😒😒");
+  });
 const MONGO_URL = process.env.MONGO_URL;
 export async function createConnection() {
   const client = new MongoClient(MONGO_URL);
