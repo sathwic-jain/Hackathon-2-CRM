@@ -23,6 +23,35 @@ export async function Login({ username, password }) {
   }
 }
 
+export async function genPassword(password) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedpassword = await bcrypt.hash(password, salt);
+    return hashedpassword;
+  }
+
+export async function Addusers({value }) {
+    // const client = await createConnection();
+    const username=value.username;
+    const password=value.password;
+    const existing = await client
+      .db("accounts")
+      .collection("signup")
+      .findOne({ username: username });
+    if (existing) return "Username exists!!Try logging in🙌";
+    // else if (
+    //   !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&*]).{8,}$/g.test(password)
+    // )
+    //   return "Password pattern not met";
+    else {
+      const hpassword = await genPassword(password);
+      const Users = await client
+        .db("accounts")
+        .collection("signup")
+        .insertOne({ username: username, password: hpassword });
+      return Users;
+    }
+  }
+
 
 export async function Getusersbyname({username}) {
     const UserList = await client

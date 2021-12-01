@@ -15,10 +15,11 @@ app.use(cors());
 app.listen(PORT,()=>{
     console.log(`listening to ${PORT}`);
 });
-app.get("/", (request, response) => {
-    response.send("hello 👍😒🙌🙌😒😒");
-  });
 const MONGO_URL = process.env.MONGO_URL;
+app.get("/", (request, response) => {
+    response.send(`hello 👍😒🙌🙌😒😒`);
+  });
+
 export async function createConnection() {
   const client = new MongoClient(MONGO_URL);
   await client.connect();
@@ -26,6 +27,7 @@ export async function createConnection() {
 
   return client;
 }
+
 createConnection();
 app.use("/users", userRouter);
 app.use("/leads",leadRouter);
