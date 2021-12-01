@@ -1,5 +1,5 @@
 import express from "express";
-import { Login,Getusersbyname } from "../helper.js";
+import { Login,Getusersbyname,Getusers } from "../helper.js";
 const router = express.Router();
 
 // import { genPassword, Getusers } from "../helper.js";
@@ -15,4 +15,9 @@ router.route("/:username").get(async (request, response) => {
     const users = await Getusersbyname({username});
     response.send(users);
   });
+
+  router.route("/all").post(async(request,response)=>{
+      const users=await Getusers();
+      response.send(users);
+  })
 export const userRouter = router;

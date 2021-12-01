@@ -32,3 +32,11 @@ export async function Getusersbyname({username}) {
       console.log(UserList);
     return UserList;
   }
+  export async function Getusers() {
+    const UserList = await client
+      .db("CMR")
+      .collection("users")
+      .find({}).toArray();
+      console.log(UserList)
+    return UserList;
+  }
