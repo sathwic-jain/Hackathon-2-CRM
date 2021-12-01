@@ -1,7 +1,7 @@
 import express from "express";
 import { Login,Getusersbyname,Getusers,Addusers } from "../helper.js";
 const router = express.Router();
-
+import {auth,manager,emp} from "../middleware/auth.js";
 // import { genPassword, Getusers } from "../helper.js";
 
 router.route("/login").post(async (request, response) => {
@@ -16,12 +16,12 @@ router.route("/:username").get(async (request, response) => {
     response.send(users);
   });
 
-  router.route("/all").get(async(request,response)=>{
+  router.route("/all").post(async(request,response)=>{
       const users=await Getusers();
       response.send(users);
   })
 
-  router.route("/add").put(async(request,response)=>{
+  router.route("/add").put(auth,async(request,response)=>{
     const value= request.body;
     console.log(value);
     const currentUser = await Addusers({value});
