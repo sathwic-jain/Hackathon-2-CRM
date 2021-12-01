@@ -47,7 +47,7 @@ export async function Addusers({value }) {
       const Users = await client
         .db("accounts")
         .collection("signup")
-        .insertOne({ username: username, password: hpassword });
+        .insertOne({ value });
       return Users;
     }
   }

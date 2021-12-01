@@ -23,6 +23,7 @@ router.route("/:username").get(async (request, response) => {
 
   router.route("/add").put(async(request,response)=>{
     const value= request.body;
+    console.log(value);
     const currentUser = await Addusers({value});
     response.send(currentUser);
   });
