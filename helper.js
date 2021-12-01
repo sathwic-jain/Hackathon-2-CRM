@@ -24,11 +24,11 @@ export async function Login({ username, password }) {
     }
   }
 
-  export async function Getusers() {
+  export async function Getusersbyname({username}) {
     const UserList = await client
       .db("CMR")
       .collection("users")
-      .find({})
+      .find({username:username})
       .toArray();
     return UserList;
   }

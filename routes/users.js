@@ -1,5 +1,5 @@
 import express from "express";
-import { Login,Getusers } from "../helper.js";
+import { Login,Getusersbyname } from "../helper.js";
 const router = express.Router();
 
 // import { genPassword, Getusers } from "../helper.js";
@@ -12,7 +12,8 @@ router.route("/login").post(async (request, response) => {
   else response.status(401).send({message:"invalid credentials"});
 });
 router.route("/signup/user").get(async (request, response) => {
-    const users = await Getusers();
+    const {username}=request.body;
+    const users = await Getusersbyname({username});
     response.send(users);
   });
 export const userRouter = router;
