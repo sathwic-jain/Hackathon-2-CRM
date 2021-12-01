@@ -6,13 +6,12 @@ const router = express.Router();
 
 router.route("/login").post(async (request, response) => {
   const { username, password } = request.body;
-  
   const userCredentials = await Login({username, password});
   if (userCredentials) response.send({message:"Signed in"});
   else response.status(401).send({message:"invalid credentials"});
 });
-router.route("/signup/user").get(async (request, response) => {
-    const {username}=request.body;
+router.route("/:username").get(async (request, response) => {
+    const {username}=request.params;
     const users = await Getusersbyname({username});
     response.send(users);
   });
