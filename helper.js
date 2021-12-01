@@ -34,8 +34,8 @@ export async function Addusers({value }) {
     const username=value.username;
     const password=value.password;
     const existing = await client
-      .db("accounts")
-      .collection("signup")
+      .db("CMR")
+      .collection("users")
       .findOne({ username: username });
     if (existing) return "Username exists!!Try logging in🙌";
     // else if (
@@ -45,8 +45,8 @@ export async function Addusers({value }) {
     else {
       const hpassword = await genPassword(password);
       const Users = await client
-        .db("accounts")
-        .collection("signup")
+        .db("CMR")
+        .collection("users")
         .insertOne({ value });
       return Users;
     }

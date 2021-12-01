@@ -16,7 +16,7 @@ router.route("/:username").get(async (request, response) => {
     response.send(users);
   });
 
-  router.route("/all").post(async(request,response)=>{
+  router.route("/all").get(async(request,response)=>{
       const users=await Getusers();
       response.send(users);
   })
