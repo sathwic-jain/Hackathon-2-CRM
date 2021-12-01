@@ -28,7 +28,7 @@ export async function Login({ username, password }) {
     const UserList = await client
       .db("CMR")
       .collection("users")
-      .find({username:username})
+      .findOne({username:username})
       .toArray();
     return UserList;
   }
