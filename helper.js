@@ -80,3 +80,11 @@ export async function Getusersbyname({username}) {
       console.log(UserList)
     return UserList;
   }
+  export async function Getleads() {
+    const UserList = await client
+      .db("LEADS")
+      .collection("lead")
+      .find({}).toArray();
+      console.log(UserList)
+    return UserList;
+  }
