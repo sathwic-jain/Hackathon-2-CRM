@@ -3,13 +3,13 @@ import { Addlead,Getleads,Getleadbyid,AddOnelead,DeleteLeadByID } from "../helpe
 const router = express.Router();
 
 
-router.route("/add").put(async(request,response)=>{
+router.route("/add").post(async(request,response)=>{
   const value= request.body;
   console.log(value);
   const currentUser = await Addlead({value});
   response.send(currentUser);
 });
-router.route("/all").post(async(request,response)=>{
+router.route("/all").get(async(request,response)=>{
   const currentUser = await Getleads();
   response.send(currentUser);
 });
