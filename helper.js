@@ -1,6 +1,7 @@
 import { client } from "./index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { ObjectId } from "bson";
 
 export async function Login({ username, password }) {
   const userLOGIN = await client
@@ -62,7 +63,14 @@ export async function Addlead({value }) {
       .insertOne( value );
     return Users;
   }
-
+  export async function Getleadbyid({id}) {
+    const UserList = await client
+      .db("LEADS")
+      .collection("lead")
+      .findOne({_id:ObjectId(id)});
+      console.log(UserList);
+    return UserList;
+  }
 
 export async function Getusersbyname({username}) {
     const UserList = await client
