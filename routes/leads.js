@@ -20,10 +20,10 @@ router.route("/:id").get(async (request, response) => {
 });
 router.route("/:email").get( async (request, response) => {
   const { email } = request.params;
-  try{
+ 
   const deleting=await DeleteLeadByID({email});
-  response.send(deleting);}
-  catch(err){console.error(err)} 
+  response.send(deleting);
+  
   
 })
 router.route("/add/:id").put(async(request,response)=>{
