@@ -84,7 +84,7 @@ export async function DeleteLeadByID({ id }) {
   const Users = await client
     .db("LEADS")
     .collection("lead")
-    .deleteOne({ id: ObjectId(id) });
+    .deleteOne({ _id: ObjectId(id) });
   return Users;
 }
 export async function Getusersbyname({ username }) {
