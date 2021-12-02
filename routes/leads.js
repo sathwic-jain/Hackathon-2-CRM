@@ -1,5 +1,5 @@
 import express from "express";
-import { Addlead,Getleads,Getleadbyid } from "../helper.js";
+import { Addlead,Getleads,Getleadbyid,AddOnelead } from "../helper.js";
 const router = express.Router();
 
 
@@ -17,5 +17,12 @@ router.route("/:id").get(async (request, response) => {
   const {id}=request.params;
   const users = await Getleadbyid({id});
   response.send(users);
+});
+router.route("/add/:id").put(async(request,response)=>{
+  const{id}=request.params;
+  const value= request.body;
+  console.log(value);
+  const currentUser = await AddOnelead({id,value});
+  response.send(currentUser);
 });
 export const leadRouter = router;
