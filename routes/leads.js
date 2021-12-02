@@ -1,5 +1,5 @@
 import express from "express";
-import { Addlead,Getleads,Getleadbyid,AddOnelead } from "../helper.js";
+import { Addlead,Getleads,Getleadbyid,AddOnelead,DeleteLeadByID } from "../helper.js";
 const router = express.Router();
 
 
@@ -17,7 +17,11 @@ router.route("/:id").get(async (request, response) => {
   const {id}=request.params;
   const users = await Getleadbyid({id});
   response.send(users);
-});
+}).delete( async (request, response) => {
+  const { id } = request.params;
+  await DeleteLeadByID(id);
+  response.send("done"); 
+})
 router.route("/add/:id").put(async(request,response)=>{
   const{id}=request.params;
   const value= request.body;
