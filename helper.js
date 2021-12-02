@@ -9,11 +9,11 @@ export async function Login({ username, password }) {
     .findOne({ username: username });
 
   if (userLOGIN) {
-    //
-    // console.log(userLOGIN.type);
-    // const token = jwt.sign({ id: userLOGIN.type }, process.env.Token_admin);
-    // console.log(token);
-    //
+    
+    console.log(userLOGIN.type);
+    const token = jwt.sign({ id: userLOGIN.type }, process.env.Token[type]);
+    console.log(token);
+    localStorage.setItem("token",token);
     const pass = await bcrypt.compare(password, userLOGIN.password);
     if (pass) return "true";
     else return null;
@@ -44,12 +44,23 @@ export async function Addusers({value }) {
     //   return "Password pattern not met";
     else {
       const hpassword = await genPassword(password);
+      value.password=hpassword;
       const Users = await client
         .db("CMR")
         .collection("users")
-        .insertOne({ value });
+        .insertOne(value);
       return Users;
     }
+  }
+
+  
+export async function Addlead({value }) {
+  
+    const Users = await client
+      .db("LEADS")
+      .collection("lead")
+      .insertOne( value );
+    return Users;
   }
 
 

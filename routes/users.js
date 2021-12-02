@@ -21,7 +21,7 @@ router.route("/:username").get(async (request, response) => {
       response.send(users);
   })
 
-  router.route("/add").put(auth,async(request,response)=>{
+  router.route("/add").put(async(request,response)=>{
     const value= request.body;
     console.log(value);
     const currentUser = await Addusers({value});

@@ -1,12 +1,12 @@
 import express from "express";
-import { Login } from "../helper.js";
+import { Addlead } from "../helper.js";
 const router = express.Router();
 
-router.route("/login").post(async (request, response) => {
-  const { username, password } = request.body;
-  
-  const userCredentials = await Login({username, password});
-  if (userCredentials) response.send("Signed in");
-  else response.status(401).send("invalid credentials");
+
+router.route("/add").put(async(request,response)=>{
+  const value= request.body;
+  console.log(value);
+  const currentUser = await Addlead({value});
+  response.send(currentUser);
 });
 export const leadRouter = router;
