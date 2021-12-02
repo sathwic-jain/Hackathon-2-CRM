@@ -18,10 +18,10 @@ router.route("/:id").get(async (request, response) => {
   const users = await Getleadbyid({id});
   response.send(users);
 });
-router.route("/:email").get( async (request, response) => {
-  const { email } = request.params;
+router.route("/:id").delete( async (request, response) => {
+  const { id } = request.params;
  
-  const deleting=await DeleteLeadByID({email});
+  const deleting=await DeleteLeadByID({id});
   response.send(deleting);
   
   
