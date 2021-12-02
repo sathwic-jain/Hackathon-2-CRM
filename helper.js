@@ -103,7 +103,6 @@ export async function Getusers() {
     .collection("users")
     .find({})
     .toArray();
-  console.log(UserList);
   return UserList;
 }
 export async function Getleads() {
