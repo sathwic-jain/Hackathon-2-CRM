@@ -17,10 +17,14 @@ router.route("/:id").get(async (request, response) => {
   const {id}=request.params;
   const users = await Getleadbyid({id});
   response.send(users);
-}).delete( async (request, response) => {
-  const { id } = request.params;
-  await DeleteLeadByID(id);
-  response.send("done"); 
+});
+router.route("/:email").get( async (request, response) => {
+  const { email } = request.params;
+  try{
+  const deleting=await DeleteLeadByID({email});
+  response.send(deleting);}
+  catch(err){console.error(err)} 
+  
 })
 router.route("/add/:id").put(async(request,response)=>{
   const{id}=request.params;
