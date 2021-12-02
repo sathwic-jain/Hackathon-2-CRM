@@ -94,23 +94,22 @@ export async function Getusersbyname({ username }) {
     .db("CMR")
     .collection("users")
     .findOne({ username: username });
-  console.log(UserList);
   return UserList;
 }
-export async function Getusers() {
+export async function Allusers() {
   const UserList = await client
     .db("CMR")
     .collection("users")
-    .find({})
+    .findOne({})
     .toArray();
+    console.log(UserList);
   return UserList;
 }
-export async function Getleads() {
+export async function Getleads(){ 
   const UserList = await client
     .db("LEADS")
     .collection("lead")
     .find({})
     .toArray();
-  console.log(UserList);
   return UserList;
 }

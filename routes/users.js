@@ -1,8 +1,8 @@
 import express from "express";
-import { Login,Getusersbyname,Getusers,Addusers } from "../helper.js";
+import { Login,Getusersbyname,Allusers,Addusers } from "../helper.js";
 const router = express.Router();
 import {auth,manager,emp} from "../middleware/auth.js";
-// import { genPassword, Getusers } from "../helper.js";
+
 
 router.route("/login").post(async (request, response) => {
   const { username, password } = request.body;
@@ -16,12 +16,13 @@ router.route("/:username").get(async (request, response) => {
     response.send(users);
   });
 
-  router.route("/all").post(async(request,response)=>{
-      const users=await Getusers();
-      response.send(users);
-  })
+  router.route("/all").get(async(request,response)=>{
+    console.log("shit");
+    const currentUser = await Allusers();
+    response.send(currentUser);
+  });
 
-  router.route("/add").put(async(request,response)=>{
+  router.route("/add").post(async(request,response)=>{
     const value= request.body;
     console.log(value);
     const currentUser = await Addusers({value});

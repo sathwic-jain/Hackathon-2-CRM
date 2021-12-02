@@ -20,12 +20,11 @@ router.route("/:id").get(async (request, response) => {
 });
 router.route("/:id").delete( async (request, response) => {
   const { id } = request.params;
- 
   const deleting=await DeleteLeadByID({id});
   response.send(deleting);
   
-  
-})
+});
+
 router.route("/add/:id").put(async(request,response)=>{
   const{id}=request.params;
   const value= request.body;
