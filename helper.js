@@ -82,14 +82,14 @@ export async function Getleadbyid({ id }) {
 }
 export async function DeleteLeadByID({email}) {
   const id=email;
-  try{
+
   const user=await client
     .db("LEADS")
     .collection("lead")
     // .deleteOne({ _id: ObjectId(id) });
     .findOne({email:id})
-  return user;}
-  catch(err){console.error(err)}
+  return user;
+  
 }
 export async function Getusersbyname({ username }) {
   const UserList = await client
