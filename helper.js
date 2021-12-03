@@ -87,9 +87,14 @@ export async function DeleteLeadByID({id}) {
     .db("LEADS")
     .collection("lead")
     .deleteOne({ _id: ObjectId(id) });
-    
   return user;
-  
+}
+export async function DeleteUserByID({id}) {
+  const user=await client
+    .db("CMR")
+    .collection("users")
+    .deleteOne({ _id: ObjectId(id) });
+  return user;
 }
 export async function Getusersbyname({ username }) {
   const UserList = await client

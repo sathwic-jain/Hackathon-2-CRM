@@ -1,5 +1,5 @@
 import express from "express";
-import { Login,Getusersbyname,Allusers,Addusers } from "../helper.js";
+import { Login,Getusersbyname,Allusers,Addusers,DeleteUserByID } from "../helper.js";
 const router = express.Router();
 import {auth,manager,emp} from "../middleware/auth.js";
 
@@ -28,4 +28,10 @@ router.route("/:username").get(async (request, response) => {
     response.send(currentUser);
   });
   
+  router.route("/:id").delete( async (request, response) => {
+    const { id } = request.params;
+    const deleting=await DeleteUserByID({id});
+    response.send(deleting);
+    
+  });
 export const userRouter = router;
