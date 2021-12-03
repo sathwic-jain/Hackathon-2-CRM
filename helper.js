@@ -10,12 +10,15 @@ export async function Login({ username, password }) {
     .findOne({ username: username });
 
   if (userLOGIN) {
-    console.log(userLOGIN.type);
+    const type=(userLOGIN.type);
     const token = jwt.sign({ id: userLOGIN.type }, process.env.Token[type]);
     console.log(token);
     localStorage.setItem("token", token);
     const pass = await bcrypt.compare(password, userLOGIN.password);
-    if (pass) return "true";
+    if (pass) {
+      localStorage.setItem("type", type);
+    return "true";
+  }
     else return null;
   } else {
     console.log("INVALID CREDENTIALS");
@@ -30,7 +33,6 @@ export async function genPassword(password) {
 }
 
 export async function Addusers({ value }) {
-  // const client = await createConnection();
   const username = value.username;
   const password = value.password;
   const existing = await client
@@ -96,11 +98,11 @@ export async function Getusersbyname({ username }) {
     .findOne({ username: username });
   return UserList;
 }
-export async function Allusers() {
+export async function Allusers({}) {
   const UserList = await client
     .db("CMR")
     .collection("users")
-    .findOne({})
+    .find({})
     .toArray();
     console.log(UserList);
   return UserList;
