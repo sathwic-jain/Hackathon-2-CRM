@@ -9,7 +9,7 @@ router.route("/login").post(async (request, response) => {
   console.log(request.body);
   const { username, password } = request.body;
   const userCredentials = await Login({username, password});
-  if (userCredentials) response.send([{message:"Signed in",token:userCredentials}].stringify());
+  if (userCredentials) response.json({hello:"shit"}).send([{message:"Signed in",token:userCredentials}].stringify());
   else response.status(401).send({message:"invalid credentials"});
 });
 router.route("/:username").get(async (request, response) => {
