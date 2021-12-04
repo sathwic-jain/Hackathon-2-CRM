@@ -13,16 +13,17 @@ export async function Login({ username, password }) {
     console.log("a");
     console.log(userLOGIN.type);
     const type=(userLOGIN.type);
-   var token_type;
-    if(type==="Administrator") token_type=process.env.Token_Administrator;
-    else if(type==="Manager")token_type=process.env.Token_Manager;
-    else if(type==="Employee") token_type=process.env.Token_Employee;
+  //  var token_type;
+  //   if(type==="Administrator") token_type=process.env.Token_Administrator;
+  //   else if(type==="Manager")token_type=process.env.Token_Manager;
+  //   else if(type==="Employee") token_type=process.env.Token_Employee;
     const pass = await bcrypt.compare(password, userLOGIN.password);
     console.log(pass);
     if (pass) {
-       const token = jwt.sign({ id: userLOGIN._id }, token_type);
-       console.log(token);
-    return token;
+    //    const token = jwt.sign({ id: userLOGIN._id }, token_type);
+    //    console.log(token);
+    // return token;
+    return true;
   }
     else return null;
   } else {
