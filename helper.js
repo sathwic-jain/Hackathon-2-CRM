@@ -103,7 +103,7 @@ export async function Getusersbyname({ username }) {
     .findOne({ username: username });
   return UserList;
 }
-export async function Allusers({}) {
+export async function Allusers() {
   const UserList = await client
     .db("CMR")
     .collection("users")

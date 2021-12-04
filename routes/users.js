@@ -1,8 +1,9 @@
-import express from "express";
-import { Login,Getusersbyname,Allusers,Addusers,DeleteUserByID } from "../helper.js";
+import express, { application } from "express";
+import { Login,Getusersbyname,Allusers,Getleads,Addusers,DeleteUserByID } from "../helper.js";
 const router = express.Router();
 import {auth,manager,emp} from "../middleware/auth.js";
 
+let app=express();
 
 router.route("/login").post(async (request, response) => {
   const { username, password } = request.body;
@@ -16,10 +17,22 @@ router.route("/:username").get(async (request, response) => {
     response.send(users);
   });
 
-  router.route("/all/:username").get(async(request,response)=>{
-    const currentUser = await Allusers({});
+
+  router.route("/").get(async(request,response)=>{
+    try{
+      const currentUser = await Allusers();
     response.send(currentUser);
+    }
+    catch(err){response.send(err)}
   });
+
+//  router.get("/",async(request,response)=>{
+//     try{
+//       const currentUser = await Allusers();
+//     response.send(currentUser);
+//     }
+//     catch(err){response.send(err)}
+//   });
 
   router.route("/add").post(async(request,response)=>{
     const value= request.body;
