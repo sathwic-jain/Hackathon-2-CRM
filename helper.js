@@ -10,14 +10,19 @@ export async function Login({ username, password }) {
     .findOne({ username: username });
 
   if (userLOGIN) {
+    console.log("a");
+    console.log(userLOGIN.type);
     const type=(userLOGIN.type);
-    const token = jwt.sign({ id: userLOGIN.type }, process.env.Token[type]);
-    console.log(token);
-    localStorage.setItem("token", token);
+   var token_type;
+    if(type==="Administrator") token_type=process.env.Token_Administrator;
+    else if(type==="Manager")token_type=process.env.Token_Manager;
+    else if(type==="Employee") token_type=process.env.Token_Employee;
     const pass = await bcrypt.compare(password, userLOGIN.password);
+    console.log(pass);
     if (pass) {
-      localStorage.setItem("type", type);
-    return "true";
+       const token = jwt.sign({ id: userLOGIN._id }, token_type);
+       console.log(token);
+    return token;
   }
     else return null;
   } else {

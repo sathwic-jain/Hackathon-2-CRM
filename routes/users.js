@@ -1,14 +1,15 @@
-import express, { application } from "express";
+import express from "express";
 import { Login,Getusersbyname,Allusers,Getleads,Addusers,DeleteUserByID } from "../helper.js";
 const router = express.Router();
 import {auth,manager,emp} from "../middleware/auth.js";
 
-let app=express();
+
 
 router.route("/login").post(async (request, response) => {
+  console.log(request.body);
   const { username, password } = request.body;
   const userCredentials = await Login({username, password});
-  if (userCredentials) response.send({message:"Signed in"});
+  if (userCredentials) response.send({message:"Signed in",token:userCredentials});
   else response.status(401).send({message:"invalid credentials"});
 });
 router.route("/:username").get(async (request, response) => {
