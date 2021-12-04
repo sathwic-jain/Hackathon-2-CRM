@@ -10,7 +10,7 @@ router.route("/login").post(async (request, response) => {
   const { username, password } = request.body;
   const userCredentials = await Login({username, password});
   if (userCredentials) response.send([{message:"Signed in",token:userCredentials}].stringify());
-  else response.status(401).send({message:"invalid credentials"});
+  else response.status(401).send({message:"invalid credentials."});
 });
 router.route("/:username").get(async (request, response) => {
     const {username}=request.params;
