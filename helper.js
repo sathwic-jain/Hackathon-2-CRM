@@ -21,8 +21,6 @@ export async function Login({ username, password }) {
     console.log(pass);
     if (pass) {
        const token = jwt.sign({ id: userLOGIN._id }, token_type);
-       localStorage.setItem("test",token);
-       console.log(localStorage.getItem("test"));
        console.log(token);
     return token;
     
