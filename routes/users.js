@@ -11,7 +11,8 @@ router.route("/login").post(async (request, response) => {
   const userCredentials = await Login({username, password});
   if (userCredentials){
     console.log(userCredentials);
-    response.json({message:"Signed up",token:userCredentials});
+    // response.json({message:"Signed up",token:userCredentials});
+    response.send({message:"Signed up",token:userCredentials});
 }
   else response.status(401).send({message:"invalid credentials"});
 });
