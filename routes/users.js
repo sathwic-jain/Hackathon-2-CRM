@@ -2,6 +2,7 @@ import express from "express";
 import { Login,Getusersbyname,Allusers,Getleads,Addusers,DeleteUserByID } from "../helper.js";
 const router = express.Router();
 import {auth} from "../middleware/auth.js";
+import {manager} from "../middleware/manager.js";
 
 
 
@@ -22,7 +23,7 @@ router.route("/:username").get(async (request, response) => {
   });
 
 
-  router.route("/").get(auth,async(request,response)=>{
+  router.route("/").get(manager,async(request,response)=>{
     try{
       const currentUser = await Allusers();
     response.send(currentUser);
@@ -45,7 +46,7 @@ router.route("/:username").get(async (request, response) => {
     response.send(currentUser);
   });
   
-  router.route("/:id").delete( async (request, response) => {
+  router.route("/:id").delete(auth,async (request, response) => {
     const { id } = request.params;
     const deleting=await DeleteUserByID({id});
     response.send(deleting);
