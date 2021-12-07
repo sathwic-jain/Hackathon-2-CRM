@@ -4,7 +4,7 @@ export const auth=(request,response,next)=>{
     try{
     const token=request.header("x-admin-token");
     console.log(token);
-    jwt.verify(token,process.env.Token_admin);
+    jwt.verify(token,process.env.Token_Administrator);
     next();
     }
     catch(err){
