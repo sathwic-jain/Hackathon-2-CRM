@@ -23,7 +23,7 @@ router.route("/:username").get(async (request, response) => {
   });
 
 
-  router.route("/").get(manager,async(request,response)=>{
+  router.route("/").get(manager||auth,async(request,response)=>{
     try{
       const currentUser = await Allusers();
     response.send(currentUser);
