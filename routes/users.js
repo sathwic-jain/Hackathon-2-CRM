@@ -22,7 +22,7 @@ router.route("/:username").get(async (request, response) => {
   });
 
 
-  router.route("/").get(auth,async(request,response)=>{
+  router.route("/").get(async(request,response)=>{
     try{
       const currentUser = await Allusers();
     response.send(currentUser);
