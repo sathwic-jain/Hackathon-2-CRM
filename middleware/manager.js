@@ -7,7 +7,7 @@ export const manager=(request,response,next)=>{
     (jwt.verify(token,process.env.Token_Manager));
     next();
     }
-    catch(er){
+    catch{
         try{
             const token=request.header("x-manager-token");
             console.log(token);
