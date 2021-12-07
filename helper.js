@@ -18,7 +18,7 @@ export async function Login({ username, password }) {
     else if(type==="Manager")token_type=process.env.Token_Manager;
     else if(type==="Employee") token_type=process.env.Token_Employee;
     const pass = await bcrypt.compare(password, userLOGIN.password);
-    console.log(pass);
+    // console.log(pass);
     if (pass) {
        const token = jwt.sign({ id: userLOGIN._id }, token_type);
        console.log(token);
