@@ -1,7 +1,7 @@
 import express from "express";
 import { Login,Getusersbyname,Allusers,Getleads,Addusers,DeleteUserByID } from "../helper.js";
 const router = express.Router();
-import {auth,manager,emp} from "../middleware/auth.js";
+import {auth} from "../middleware/auth.js";
 
 
 
