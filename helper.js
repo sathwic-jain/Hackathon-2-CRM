@@ -16,7 +16,7 @@ export async function Login({ username, password }) {
    var token_type;
     if(type==="Administrator") token_type=process.env.Token_Administrator;
     else if(type==="Manager")token_type=process.env.Token_Manager;
-    else if(type==="Employee") token_type=process.env.Token_Employee;
+    else if(type==="employee") token_type=process.env.Token_Employee;
     const pass = await bcrypt.compare(password, userLOGIN.password);
     // console.log(pass);
     if (pass) {
