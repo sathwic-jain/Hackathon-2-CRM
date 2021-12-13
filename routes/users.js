@@ -16,6 +16,18 @@ router.route("/login").post(async (request, response) => {
 }
   else response.status(401).send({message:"invalid credentials"});
 });
+
+router.route("/forgot").post(async (request, response) => {
+  console.log(request.body);
+  const { username } = request.body;
+  const userName = await Forgot({username});
+  if (userName){
+    console.log(userName);
+    response.send({message:"Signed up"});
+}
+  else response.status(401).send({message:"invalid credentials"});
+});
+
 router.route("/:username").get(async (request, response) => {
     const {username}=request.params;
     const users = await Getusersbyname({username});

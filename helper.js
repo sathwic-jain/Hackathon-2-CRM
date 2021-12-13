@@ -32,6 +32,11 @@ export async function Login({ username, password }) {
   }
 }
 
+export async function Forgot({username}){
+  const user=await client.db("CMR").collection("users").findOne({username:username})
+  return user;
+}
+
 export async function genPassword(password) {
   const salt = await bcrypt.genSalt(10);
   const hashedpassword = await bcrypt.hash(password, salt);
