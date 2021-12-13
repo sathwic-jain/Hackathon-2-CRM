@@ -1,5 +1,5 @@
 import express from "express";
-import { Login,Getusersbyname,Allusers,Getleads,Addusers,DeleteUserByID } from "../helper.js";
+import { Login,Getusersbyname,Allusers,Addusers,DeleteUserByID,Forgot } from "../helper.js";
 const router = express.Router();
 import {auth} from "../middleware/auth.js";
 import {manager} from "../middleware/manager.js";
