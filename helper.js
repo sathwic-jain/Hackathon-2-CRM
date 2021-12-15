@@ -49,7 +49,7 @@ export async function Forgot({username}){
       from: 'testing.00k@gmail.com',
       to: `${username}`,
       subject: `Reset your password`,
-      text: "http://localhost:3000/reset"+token,
+      text: "http://localhost:3000/reset/"+token,
       replyTo: `test`
     }
     transporter.sendMail(mailOptions, function(err, res) {
