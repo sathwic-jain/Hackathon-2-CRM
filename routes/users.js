@@ -32,7 +32,7 @@ router.route("/forgot/reset").post(async (request, response) => {
   const { email,password,token } = request.body;
   const userReset = await Reset({email,password,token});
   if (userReset){
-    console.log(userName);
+    console.log(userReset);
     response.send({message:"Signed up"});
 }
   else response.status(401).send({message:"invalid credentials"});
