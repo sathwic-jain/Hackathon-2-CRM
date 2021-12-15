@@ -2,6 +2,7 @@ import { client } from "./index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "bson";
+import nodemailer from "nodemailer";
 
 export async function Login({ username, password }) {
   const userLOGIN = await client
@@ -34,9 +35,35 @@ export async function Login({ username, password }) {
 
 export async function Forgot({username}){
   const user=await client.db("CMR").collection("users").findOne({username:username})
-  return user;
+  if(user){
+    const token = jwt.sign({ id: user._id }, user.username);
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.user,
+        pass: process.env.pass
+      }
+    })
+    
+    const mailOptions = {
+      from: 'testing.00k@gmail.com',
+      to: `${username}`,
+      subject: `Reset your password`,
+      text: "http://localhost:3000/reset"+token,
+      replyTo: `test`
+    }
+    transporter.sendMail(mailOptions, function(err, res) {
+      if (err) {
+        console.error('there was an error: ', err);
+      } else {
+        console.log('here is the res: ', res)
+      }
+    })
+    return token;
+  }
+  
+  else return null;
 }
-
 export async function genPassword(password) {
   const salt = await bcrypt.genSalt(10);
   const hashedpassword = await bcrypt.hash(password, salt);
@@ -130,4 +157,29 @@ export async function Getleads(){
     .find({})
     .toArray();
   return UserList;
+}
+
+export async function Reset({ email,password,token }) {
+  const User = await client
+    .db("CMR")
+    .collection("users")
+    .findOne({ username: email });
+  if(User){
+    const pass=jwt.verify(token,email);
+    if(pass){
+      const hpassword = await genPassword(password);
+      const userReset = await client
+      .db("CMR")
+      .collection("users")
+      .updateOne(
+        { _id: ObjectId(User._id) },
+        {
+          $set: {
+            password:hpassword,
+          },
+        }
+      );
+      return true;
+    }else return null;
+  }else return null;
 }

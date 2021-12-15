@@ -4,7 +4,7 @@ import { userRouter } from "./routes/users.js";
 import {leadRouter} from  "./routes/leads.js";
 import dotenv from "dotenv";
 import cors from "cors";
-// import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 dotenv.config();
 
 

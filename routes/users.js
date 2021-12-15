@@ -1,5 +1,5 @@
 import express from "express";
-import { Login,Getusersbyname,Allusers,Addusers,DeleteUserByID,Forgot } from "../helper.js";
+import { Login,Getusersbyname,Allusers,Addusers,DeleteUserByID,Forgot,Reset } from "../helper.js";
 const router = express.Router();
 import {auth} from "../middleware/auth.js";
 import {manager} from "../middleware/manager.js";
@@ -22,6 +22,16 @@ router.route("/forgot").post(async (request, response) => {
   const { username } = request.body;
   const userName = await Forgot({username});
   if (userName){
+    console.log(userName);
+    response.send({message:"Signed up",token:userName});
+}
+  else response.status(401).send({message:"invalid credentials"});
+});
+
+router.route("/forgot/reset").post(async (request, response) => {
+  const { email,password,token } = request.body;
+  const userReset = await Reset({email,password,token});
+  if (userReset){
     console.log(userName);
     response.send({message:"Signed up"});
 }
