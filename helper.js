@@ -179,7 +179,7 @@ export async function Reset({ email,password,token }) {
           },
         }
       );
-      return true;
+      return ("found");
     }else return ("wrong token");
   }else return ("not found");
 }
