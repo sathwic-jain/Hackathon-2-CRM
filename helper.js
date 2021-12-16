@@ -180,6 +180,6 @@ export async function Reset({ email,password,token }) {
         }
       );
       return true;
-    }else return null;
-  }else return null;
+    }else return ("wrong token");
+  }else return ("not found");
 }

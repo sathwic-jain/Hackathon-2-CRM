@@ -33,9 +33,10 @@ router.route("/forgot/reset").post(async (request, response) => {
   const userReset = await Reset({email,password,token});
   if (userReset){
     console.log(userReset);
-    response.send({message:"Signed up"});
+    response.send({message:"Password changed successfully"});
 }
-  else response.status(401).send({message:"invalid credentials"});
+  else if(userReset==="not found") response.status(401).send({message:"invalid credentials,check the email-id provided or contact the administrator"});
+  else if(userReset==="wrong token") response.status(402).send({message:"Try changing your own password buddy!!😒"})
 });
 
 router.route("/:username").get(async (request, response) => {
