@@ -31,7 +31,7 @@ router.route("/forgot").post(async (request, response) => {
 router.route("/forgot/reset").post(async (request, response) => {
   const { email,password,token } = request.body;
   const userReset = await Reset({email,password,token});
-  if (userReset){
+  if (userReset==="found"){
     console.log(userReset);
     response.send({message:"Password changed successfully"});
 }
