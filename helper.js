@@ -165,8 +165,10 @@ export async function Reset({ email,password,token }) {
     .collection("users")
     .findOne({ username: email });
   if(User){
+    try{
     const pass=jwt.verify(token,email);
-    if(pass){
+    }catch{return "wrong token"}
+    {
       const hpassword = await genPassword(password);
       const userReset = await client
       .db("CMR")
@@ -180,6 +182,6 @@ export async function Reset({ email,password,token }) {
         }
       );
       return ("found");
-    }else return ("wrong token");
+    }
   }else return ("not found");
 }
