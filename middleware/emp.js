@@ -9,14 +9,14 @@ export const emp=(request,response,next)=>{
     }
     catch{
         try{
-            const token=request.header("x-manager-token");
+            const token=request.header("x-emp-token");
             console.log(token);
             (jwt.verify(token,process.env.Token_Manager));
             next();
             }
             catch{
                 try{
-                    const token=request.header("x-manager-token");
+                    const token=request.header("x-emp-token");
                     console.log(token);
                     jwt.verify(token,process.env.Token_Administrator);
                     next();
